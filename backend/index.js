@@ -63,7 +63,6 @@ app.put("/api/configurations/:id", async (req, res) => {
             { new: true }
         );
 
-
         if (updatedConfig) {
             return res.status(200).json({ message: 'success' });
         } else {
