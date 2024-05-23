@@ -84,6 +84,15 @@ app.put("/api/configurations/:id", async (req, res) => {
 });
 
 
+// Get all similar Ids, time taking
+// app.get("/api/allids", async (req, res) => {
+//     const inputId = req.query.inputId; 
+//     const suggestIds = await Configuration.find({ configId: inputId }); 
+//     console.log(suggestIds);
+
+//     return res.json({ suggestIds });
+// });
+
 app.listen(PORT, () => {
     console.log(`Server started successfully at ${PORT}`);
 })
