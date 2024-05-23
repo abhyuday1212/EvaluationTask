@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Page1 from "./Page1";
+import Page2 from "./Page2";
 
 const Home = () => {
   return (
-    <div className='bg-red-600'>This is Home page</div>
-  )
-}
+    <div id="main">
+      <Page1 />
+      <Page2 />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
