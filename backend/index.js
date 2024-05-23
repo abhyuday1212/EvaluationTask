@@ -17,7 +17,7 @@ app.use(cors())
 connectDB()
 
 // Backend: Task1
-/*
+/* #- Methodology
 1: Connected to DB
 2: Created a Configuration Schema by looking up to DB
 3: Using the Schema, accessed the DB collection for configuration.
@@ -42,6 +42,15 @@ app.get("/api/configurations/:id", async (req, res) => {
 
 // --------------------------------------------------------------------------------
 // backend: Task-2
+/*
+ #- Methodology
+ 1: extracted the Id from the params
+ 2: Parsed the input for zod validation for type checing
+ 3: If the type of the input is correct then perform the find and update remark operation
+ 4: Map the key "remark" with the newRemark value for finding and updation
+ 5: { new: true } , this is used to give the object after update is applied, otherwise default or old remark will be given
+*/
+
 app.put("/api/configurations/:id", async (req, res) => {
     try {
         const Id = req.params.id;
