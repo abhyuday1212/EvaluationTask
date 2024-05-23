@@ -4,7 +4,6 @@ import cors from "cors"
 import connectDB from "./database/db.js";
 import { Configuration } from "./database/schema.js";
 import { updateRemark } from "./Validation/Zod.js"
-import mongoose from "mongoose";
 
 
 const app = express();
@@ -27,16 +26,18 @@ connectDB()
 app.get("/api/configurations/:id", async (req, res) => {
     try {
         const Id = req.params.id;
+
         const config = await Configuration.findOne({ configId: Id });
 
         if (config) {
             return res.status(200).json(config.data);
         } else {
-            return res.status(404).json({ message: 'Invalid Id, Configuration not found' });
+
+            return res.status(404).json({ error: 'Invalid Id, Configuration not found' });
         }
     } catch (err) {
         console.log(err);
-        return res.status(500).send('Internal Server error');
+        return res.status(500).json({ error: "Internal Server error" })
     }
 })
 
@@ -53,8 +54,12 @@ app.get("/api/configurations/:id", async (req, res) => {
 
 app.put("/api/configurations/:id", async (req, res) => {
     try {
-        const Id = req.params.id;
+        const Id = req.params.id.trim();
         const updatePayload = req.body;
+
+        if (updatePayload.remark.trim() === "" || !Id) {
+            return res.status(400).json({ message: "Please provide a valid Id and fill all the fields" });
+        }
 
         //pass the payload to zod for type Validation
         const parsePayload = updateRemark.safeParse(updatePayload)
@@ -79,7 +84,7 @@ app.put("/api/configurations/:id", async (req, res) => {
         }
     } catch (err) {
         console.log(err);
-        return res.status(500).send('Internal Server error');
+        return res.status(500).json({ message: "Internal Server error" })
     }
 });
 

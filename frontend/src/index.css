@@ -16,7 +16,7 @@ body {
 }
 
 #page1 {
-  min-height: 100vh;
+  min-height: 50vh;
   width: 100%;
   /* background: red; */
   position: relative;
@@ -24,8 +24,20 @@ body {
 }
 
 #page2 {
-  min-height: 100vh;
+  min-height: 50vh;
   width: 100%;
   /* background: rgb(14, 13, 109); */
   position: relative;
+}
+
+.submit-button {
+  background-color: white;
+  color: crimson;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: rgb(0, 255, 64);
+  color: rgb(0, 0, 0);
+  transition: background-color 0.3s ease;
 }

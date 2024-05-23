@@ -6,10 +6,25 @@ const Page1 = () => {
 
   return (
     <div id="page1">
-      <h1>Fetch config</h1>
+      <h1 className="w-full flex text-4xl font-bold flex-row justify-center items-center mt-2">
+        Fetch config
+      </h1>
 
-      <div className="flex w-full max-w-sm items-center space-x-2">
+      <div className="w-full">
         <Input configId={configId} setConfigId={setConfigId} />
+
+        <div className="w-full flex">
+          <strong
+            style={{
+              marginLeft: "6px",
+              fontWeight: 600,
+            }}
+          >
+            Suggested Ids:
+          </strong>
+          <p className="flex-grow"> &nbsp;qwertyuiop,&nbsp; awnhsuikaj</p>
+        </div>
+
         <Button configId={configId} setFetchedData={setFetchedData} />
         <DisplayData data={fetchedData} />
       </div>
@@ -24,14 +39,38 @@ function Input({ configId, setConfigId }) {
   };
 
   return (
-    <input
-      type="text"
-      value={configId}
-      onChange={handleIdChange}
-      placeholder="Input Config Id..."
-    />
+    <div
+      style={{
+        margin: "6px 0px",
+        maxWidth: "fitContent",
+      }}
+    >
+      <label
+        htmlFor="input1ID"
+        style={{
+          fontWeight: 600,
+          padding: "4px 6px",
+        }}
+      >
+        Configuration Id:
+      </label>
+
+      <input
+        id="input1ID"
+        type="text"
+        required
+        value={configId}
+        onChange={handleIdChange}
+        placeholder="Input Config Id..."
+        style={{
+          border: "1px solid grey",
+          padding: "  2px 4px",
+        }}
+      />
+    </div>
   );
 }
+
 function Button({ configId, setFetchedData }) {
   async function handleSubmit() {
     // console.log("Button component : ", configId);
@@ -51,13 +90,31 @@ function Button({ configId, setFetchedData }) {
     }
   }
 
-  return <button onClick={handleSubmit}>Submit</button>;
+  return (
+    <div
+      style={{
+        margin: "4px 6px",
+        fontWeight: 600,
+        width: "4rem",
+        border: "1px solid black",
+      }}
+    >
+      <button className="w-full submit-button" onClick={handleSubmit}>
+        Submit
+      </button>
+    </div>
+  );
 }
 
 function DisplayData({ data }) {
   //   console.log("Display Data", data);
   return (
-    <div>
+    <div
+      style={{
+        marginLeft: "6px",
+        fontWeight: 600,
+      }}
+    >
       {data.length > 0 ? (
         //   Iterating over each element of the data array
         data.map((subArray, index) => (
@@ -67,7 +124,7 @@ function DisplayData({ data }) {
           </div>
         ))
       ) : (
-        <p>{data.message}</p>
+        <p>{data.error}</p>
       )}
     </div>
   );
