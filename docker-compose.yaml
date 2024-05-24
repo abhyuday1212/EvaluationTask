@@ -1,19 +1,26 @@
-version: '3.8'
-
 services:
+  mongodb:
+    image: mongo
+    volumes:
+      - data:/data/db
+
   backend:
-    build: ./backend
+    image: abhyuday1212/backend
     container_name: backend_container
     ports:
-      - "8000:8000"
-    volumes:
-      - ./backend:/app
-      - ./app/node_modules
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    env_file:
+      - ./backend/.env
 
   frontend:
-    build: ./frontend
+    image: abhyuday1212/client
     container_name: frontend_container
     ports:
       - "5173:5173"
-    volumes:
-      - ./frontend:/app
+    depends_on:
+      - backend
+
+volumes:
+  data:
